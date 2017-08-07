@@ -1,0 +1,80 @@
+#SIMPLE FIGHT
+
+import random as r
+import time
+
+y = None # DAMAGE
+s = None # RIVAL DAMAGE
+hpone = 40 #YOUR HIT POINTS
+hptwo = 40 #YOUR RIVALS HIT POINTS
+
+lst = ['w', 'm', 'a'] #Chooses your opponent by selecting a random element from the list
+#W = Warrior, M = Mage, A = Assassin
+
+print('WELCOME TO THE SIMPLE FIGHT')
+time.sleep(1)
+print('PLEASE CHOOSE YOUR CLASS:')
+print('WARRIOR  |  MAGE  |  ASSASSIN')
+
+while True: #This loop chooses your class from your input
+    x = input()
+    if x == 'warrior':
+        y = (4, 7)
+        print('You are the Warrior')
+        print('Damage Gap is between 4 - 7')
+        lst.remove('w')
+        break
+    if x == 'mage':
+        y = (2, 8)
+        print('You are the Mage')
+        print('Damage Gap is between 2 - 8')
+        lst.remove('m')
+        break
+    if x == 'assassin':
+        y = (1, 9)
+        print('You are the Assassin')
+        print('Damage Gap is between 1 - 9')
+        lst.remove('a')
+        break
+    if x != 'warrior' or x != 'mage' or x != 'assassin': #If you haven't given a proper input
+        print('This class does not exist!')
+        continue
+
+print('Your rival is now being selected! \n')
+time.sleep(2)
+t = r.choice(lst) #Picks a class from one of the remaining elements in the list(lst)
+
+while True: #This loop picks the rival class
+    if t == 'w':
+        s = (4, 7)
+        print('Your rival is the Warrior!')
+    if t == 'm':
+        s = (2, 8)
+        print('Your rival is the Mage!')
+    if t == 'a':
+        s = (1, 9)
+        print('Your rival is the Assassin!')
+    break
+
+print('The battle has begun! \n')
+
+while True: #Final loop for the actual battle
+    print('Player one attacks!')
+    plrdam = r.randint(*y) #Assigns the damage from your class(tuple) to the variable
+    time.sleep(2)
+    hptwo -= plrdam #Subtracts the damage you dealt from the rivals health
+    print('Player one did: ', plrdam, 'damage!')
+    if hptwo <= 0: #If the rival's health is less than or equal to 0..
+        print('RIVAL LOSES, PLAYER WINS!') #You win!
+        break
+    print('Rival remaining health:', hptwo, '\n')
+
+    print('Rival attacks!')
+    plrtwodam = r.randint(*s) #Assigns the damage from the rivals class(tuple) to the variable
+    time.sleep(2)
+    hpone -= plrtwodam #Subtracts the damage the rival dealt from your health
+    print('The rival did: ', plrtwodam, 'damage!')
+    if hpone <= 0: #If your health is less than or equal to 0..
+        print('THE PLAYER LOSES, RIVAL WINS!') #You lost :(
+        break
+    print('Player remaining health:', hpone, '\n')
